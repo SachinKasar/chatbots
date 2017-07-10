@@ -1,4 +1,4 @@
-# chatbots for banking application
+# Chatbots for banking application
 **This repository is about how to create simple Nodejs based Chatbots**
 
  
