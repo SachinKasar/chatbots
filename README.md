@@ -40,3 +40,8 @@ xregexp | Extended regular expressions
 :three: start application with command
 **nodeman app.js**
 
+
+**Please refer below screenshot for user and chatbot(marked yellow) conversation**
+
+![bot](https://user-images.githubusercontent.com/17163705/28005757-028b294a-656a-11e7-8c95-436224ba5925.png)
+
