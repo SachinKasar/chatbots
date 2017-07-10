@@ -58,6 +58,7 @@ rl.on('line', reply => {
 				break;
                 
             case 'TransactionsHistory':
+                 console.log("Let me check...".bold.yellow);
 				 getTransactionHistory(data.entities.timeframe,data.entities.total)
 					.then(response => {
                         console.log(response.bold.yellow)
@@ -71,7 +72,7 @@ rl.on('line', reply => {
                 
             
             case 'TransactionDetails':
-				
+				console.log("Let me check...".bold.yellow);
 				getTransactionDetails(data.entities.number)
 					.then(response => {
                         console.log(response.bold.yellow)
