@@ -18,6 +18,16 @@
 4. User can ask service with human language and bot will response to it in human like language.
 	
 
+	
+**Modules used**
+
+Module Name | Purpose
+----------- | -------------
+readline | Simple streaming readline module for NodeJS
+colors | Get colors and styles in NodeJS console
+nodemon | Simple monitor script for use during development of a node.js app
+xregexp | Extended regular expressions
+
 
 **Steps to follow**
 
