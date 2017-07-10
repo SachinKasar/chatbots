@@ -1,5 +1,23 @@
 'use strict';
+
 //const hrrp = require('http');
+const {currentBalance,getResponsePrefix,getSingleOrPluralResponse} = require('../parser');
+
+
+
+// TODO : Replace mocked transactions data and setTimeout by http async call later. 
+const transactonsHistory = [
+    " Txn# 111111 with $100",
+    " Txn# 222222 with $200",
+    " Txn# 333333 with $300"
+];
+
+const upcomingPayments = [
+    " Txn# 777777 with $400",
+    " Txn# 666666 with $500",
+    " Txn# 888999 with $600"
+];
+
 
 let getAccountBalance = () => {
 	return new Promise((resolve, reject) => {
@@ -11,26 +29,32 @@ let getAccountBalance = () => {
 }
 
 
-let getTransactionHistory = () => {
+let getTransactionHistory = (timeframe='last',total=3) => {
     let transactionsToReturn = [];
+    let transactionsOnDemand = [];
+    let type = "";
     
-    // TODO : Replace mocked transactions data and setTimeout by http async call later. 
-    const transactons = [
-        " Txn# 1234567 with $200",
-        " Txn# 3344566 with $800",
-        " Txn# 5678901 with $300"
-    ];
-    
-    transactionsToReturn.push(" Your last " + transactons.length +" transactions [Txn] are as... ");
-    for (const txn of transactons) {
-        transactionsToReturn.push(txn);
+    if(timeframe && (timeframe === "upcoming" ||   timeframe === "future")) {
+        transactionsOnDemand = upcomingPayments;
+        type = 'upcoming';
+    } else {
+        transactionsOnDemand = transactonsHistory;
+        type = 'history';
     }
-
-     return new Promise((resolve, reject) => {
-        // TODO : Replace mocked setTimeout by http async call later. 
-        setTimeout(() => {
-            resolve(transactionsToReturn.join('\r\n'));
-        },2000)
+    
+    let countString = total == 1 ? (type+"Single") : (type+"Multiple");
+     
+    let response = getResponsePrefix(timeframe,type) + "for " + total + getSingleOrPluralResponse(countString,type);
+     
+    return new Promise((resolve, reject) => {
+        transactionsToReturn.push(response);
+        for (let i=0; i<total; i++) {
+            transactionsToReturn.push(transactionsOnDemand[i]);
+        }
+       // TODO : Replace mocked setTimeout by http async call later. 
+       setTimeout(() => {
+           resolve(transactionsToReturn.join('\r\n'));
+       },2000)
     });
 }
 
@@ -47,7 +71,6 @@ let getTransactionDetails = (transactionNumber) => {
         " Location - Xyz Lane",
         " Date - 29 June 2017"
     ];
-    
     
     for (const txnDetails of transactonDetails) {
         trDetailsToReturn.push(txnDetails);
@@ -67,6 +90,3 @@ module.exports = {
     getTransactionHistory,
     getTransactionDetails
 };
-
-
- 

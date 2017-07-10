@@ -52,46 +52,49 @@ rl.on('line', reply => {
 				        rl.prompt();
 					})
 					.catch(error => {
-						console.log("There seems to be a problem connecting to the Weather service!", error);
+						console.log("Service connection issue, Please try again !", error);
 						rl.prompt();
 					});
 				break;
                 
             case 'TransactionsHistory':
-				console.log("Let me check...".bold.yellow);
-				getTransactionHistory()
+				 getTransactionHistory(data.entities.timeframe,data.entities.total)
 					.then(response => {
                         console.log(response.bold.yellow)
 				        rl.prompt();
 					})
 					.catch(error => {
-						console.log("There seems to be a problem connecting to the Weather service!", error);
+						console.log("Service connection issue, Please try again!", error);
 						rl.prompt();
 					});
 				break;
                 
             
             case 'TransactionDetails':
-				console.log("Let me check123...".bold.yellow);
-				getTransactionDetails('1234567')
+				
+				getTransactionDetails(data.entities.number)
 					.then(response => {
                         console.log(response.bold.yellow)
 				        rl.prompt();
 					})
 					.catch(error => {
-						console.log("There seems to be a problem connecting to the Weather service!", error);
+						console.log("Service connection issue, Please try again!", error);
 						rl.prompt();
 					});
 				break;
                 
-            
+            case 'Thanks':
+                console.log("No problem, happy to help you".bold.yellow);
+                rl.prompt();
+				break;
+                
             case 'Exit':
                 console.log("Bye, see you again, have a great day ahead!".bold.yellow);
                 process.exit(0);
 				break;
                 
 			default: {
-				console.log("I don't seem to understand what you really mean :(".bold.yellow);
+				console.log("I don't seem to understand what you really mean !!!".bold.yellow);
 				rl.prompt();
 			}
 		}
